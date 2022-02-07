@@ -27,11 +27,20 @@ const Header = () => {
 };
 
 const MainHeader = styled.div`
-  padding: 0 32px;
+  padding: 15px 32px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  display: flex;
+  align-items: baseline;
+  
+  & > :first-child {
+    flex-basis: 300px;
+  }
 `;
 
-const Nav = styled.nav``;
+const Nav = styled.nav`
+  display: flex;
+  gap: 30px;
+`;
 
 const NavLink = styled.a`
   font-size: 1.125rem;
