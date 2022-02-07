@@ -40,6 +40,10 @@ const MainHeader = styled.div`
 const Nav = styled.nav`
   display: flex;
   gap: 30px;
+
+  @media(max-width: 768px) {
+    display: none;
+  }
 `;
 
 const NavLink = styled.a`

@@ -35,6 +35,10 @@ const Select = ({ label, value, children, ...delegated }) => {
 const Wrapper = styled.label`
   display: flex;
   align-items: center;
+
+  @media(max-width: 375px) {
+    display: none;
+  }
 `;
 
 const VisibleLabel = styled.span`

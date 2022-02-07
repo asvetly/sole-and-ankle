@@ -19,6 +19,10 @@ const App = () => {
 
 const Main = styled.main`
   padding: 64px 32px;
+
+  @media(max-width: 768px) {
+    padding: 48px 32px;
+  }
 `;
 
 export default App;

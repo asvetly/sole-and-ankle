@@ -40,11 +40,38 @@ const ShoeCard = ({
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price
+              style={{
+                '--color':
+                    variant === 'on-sale' ? COLORS.gray[700] : undefined,
+                '--text-decoration':
+                    variant === 'on-sale' ? 'line-through' : undefined,
+              }}
+          >
+            {formatPrice(price)}
+          </Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          { typeof salePrice === 'number' && (
+              <SalePrice>
+                { formatPrice(salePrice) }
+              </SalePrice>
+          )  }
         </Row>
+        { variant !== 'default' && (
+            <Badge
+                variant={ variant }
+                style={{
+                  '--background-color': variant === 'on-sale'
+                    ? COLORS.primary
+                    : COLORS.secondary,
+                }}
+            >
+              { variant === 'on-sale' ? 'Sale' : 'Just Released!' }
+            </Badge>
+          )
+        }
       </Wrapper>
     </Link>
   );
@@ -55,16 +82,25 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  position: relative
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+`;
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.h3`
@@ -72,7 +108,10 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  color: var(--color);
+  text-decoration: var(--text-decoration);
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
@@ -81,6 +120,19 @@ const ColorInfo = styled.p`
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
+`;
+
+const Badge = styled.div`
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  color: ${COLORS.white};
+  font-size: 0.8rem;
+  line-height: 0.8rem;
+  font-weight: ${WEIGHTS.medium};
+  padding: 8px 10px;
+  border-radius: 2px;
+  background-color: var(--background-color);
 `;
 
 export default ShoeCard;
